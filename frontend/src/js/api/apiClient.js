@@ -2,7 +2,7 @@ import { auth } from "../state/auth.js";
 import { ui } from "../ui/ui.js";
 import { mockApi } from "./mockApi.js";
 
-const BASE_URL = "/api";
+const BASE_URL = "http://localhost:3333/api";
 
 async function fetchJson(path, { method = "GET", body, headers = {} } = {}) {
   const token = auth.getToken();
@@ -19,7 +19,7 @@ async function fetchJson(path, { method = "GET", body, headers = {} } = {}) {
   const text = await res.text();
   const data = text ? JSON.parse(text) : null;
   if (!res.ok) {
-    const msg = data?.message || `HTTP ${res.status}`;
+    const msg = data?.message || data?.error || `HTTP ${res.status}`;
     throw new Error(msg);
   }
   return data;

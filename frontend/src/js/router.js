@@ -54,6 +54,7 @@ export async function renderRoute() {
     viewEl.appendChild(node);
     document.getElementById("app")?.focus();
   } catch (err) {
+    console.error(err);
     ui.toast("Falha ao renderizar a tela.", { variant: "danger" });
     viewEl.innerHTML = `
       <div class="card app-card">
